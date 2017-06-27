@@ -15,8 +15,7 @@ typedef enum {
 
 template<class K, class V>
 class MyMap {
-    friend void IntervalMapTest();
-
+    
 private:
     std::map<K,V> m_;
 
