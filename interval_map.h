@@ -56,10 +56,6 @@ public:
         //auto last = m_.find(keyEnd);
         m_.erase(first, last);
         auto ret = m_.insert(std::prev(last), std::make_pair(keyStart, val));
-        // if a key exists for 'keyStart', overwrite it with 'val'
-        if (!(ret->second == val)) {
-            m_[keyStart] = val;
-        }
         return SUCCESS;
     }
 
@@ -67,7 +63,7 @@ public:
         if( !(keyStart < keyEnd) ) {
             return std::map<K, V>();
         }
-        return std::map<K, V>(m_.lower_bound(keyStart), m_.lower_bound(keyEnd));
+        return std::map<K, V>(std::prev(m_.upper_bound(keyStart)), m_.lower_bound(keyEnd));
     }
 
     // look-up of the value associated with key
@@ -78,6 +74,7 @@ public:
     int distance(K const& keyStart, K const& keyEnd) {
         return std::distance(m_.find(keyStart), m_.find(keyEnd));
     }
+    
     void display() {
         for (auto &e: m_) {
             std::cout << std::endl << e.first << "===>" << e.second << std::endl;
