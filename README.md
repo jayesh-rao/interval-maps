@@ -1,2 +1,2 @@
-# random mini projects
+# Useful mini projects
  - interval maps
